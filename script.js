@@ -71,9 +71,9 @@ class AirdropTracker {
         if (airdrop) {
             form.dataset.id = airdrop.id;
             document.getElementById('projectName').value = airdrop.projectName;
-            document.getElementById('fundingAmount').value = airdrop.fundingAmount;
+            document.getElementById('fundingAmount').value = this.formatAmount(airdrop.fundingAmount).slice(1); // remove $ sign
             document.getElementById('priority').value = airdrop.priority;
-            document.getElementById('investedAmount').value = airdrop.investedAmount;
+            document.getElementById('investedAmount').value = this.formatAmount(airdrop.investedAmount).slice(1); // remove $ sign
             document.getElementById('guideLink').value = airdrop.guideLink;
             document.getElementById('notes').value = airdrop.notes;
             document.getElementById('airdropType').value = airdrop.airdropType;
@@ -90,6 +90,41 @@ class AirdropTracker {
         document.getElementById('airdropModal').style.display = 'none';
     }
 
+    parseAmount(value) {
+        if (!value) return 0;
+        // Remove $ and any whitespace
+        value = value.toString().replace(/[\$\s]/g, '');
+        // Try to parse as number with suffix, if fails return the original text
+        const match = value.match(/^(\d+\.?\d*)\s*([kmb])?$/i);
+        if (!match) return value;
+        
+        const num = parseFloat(match[1]);
+        const suffix = (match[2] || '').toLowerCase();
+        
+        const multipliers = {
+            'k': 1000,
+            'm': 1000000,
+            'b': 1000000000
+        };
+        
+        return num * (multipliers[suffix] || 1);
+    }
+
+    formatAmount(amount) {
+        if (!amount) return '';
+        if (typeof amount !== 'number') return '$' + amount;
+        if (amount >= 1000000000) {
+            return `$${(amount / 1000000000).toFixed(1)}B`;
+        }
+        if (amount >= 1000000) {
+            return `$${(amount / 1000000).toFixed(1)}M`;
+        }
+        if (amount >= 1000) {
+            return `$${(amount / 1000).toFixed(1)}K`;
+        }
+        return `$${amount.toFixed(2)}`;
+    }
+
     handleFormSubmit(e) {
         e.preventDefault();
         
@@ -97,13 +132,11 @@ class AirdropTracker {
         const airdropData = {
             id: form.dataset.id ? parseInt(form.dataset.id) : this.currentId++,
             projectName: document.getElementById('projectName').value,
-            fundingAmount: document.getElementById('fundingAmount').value ? 
-                parseFloat(document.getElementById('fundingAmount').value) : 0,
+            fundingAmount: this.parseAmount(document.getElementById('fundingAmount').value),
             priority: document.getElementById('priority').value,
             airdropType: document.getElementById('airdropType').value,
             checkInFrequency: document.getElementById('checkInFrequency').value,
-            investedAmount: document.getElementById('investedAmount').value ? 
-                parseFloat(document.getElementById('investedAmount').value) : 0,
+            investedAmount: this.parseAmount(document.getElementById('investedAmount').value),
             guideLink: document.getElementById('guideLink').value || '',
             notes: document.getElementById('notes').value,
             date: new Date().toISOString()
@@ -202,8 +235,8 @@ class AirdropTracker {
                 <div class="card-body">
                     <p>Type: ${airdrop.airdropType}</p>
                     <p>Check-in: ${airdrop.checkInFrequency}</p>
-                    ${airdrop.fundingAmount ? `<p>Funding: $${airdrop.fundingAmount.toLocaleString()}</p>` : ''}
-                    ${airdrop.investedAmount ? `<p>Invested: $${airdrop.investedAmount.toLocaleString()}</p>` : ''}
+                    ${airdrop.fundingAmount ? `<p>Funding: ${this.formatAmount(airdrop.fundingAmount)}</p>` : ''}
+                    ${airdrop.investedAmount ? `<p>Invested: ${this.formatAmount(airdrop.investedAmount)}</p>` : ''}
                     ${airdrop.guideLink ? `<p><a href="${airdrop.guideLink}" target="_blank">View Guide</a></p>` : ''}
                     ${airdrop.notes ? `<p>Notes: ${airdrop.notes}</p>` : ''}
                 </div>
