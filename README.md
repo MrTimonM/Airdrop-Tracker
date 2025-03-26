@@ -12,6 +12,9 @@ A client-side web application for tracking and managing cryptocurrency airdrops.
 - 📤 Export/Import functionality for data backup
 - 🔍 Search functionality
 
+## Live Preview 
+https://mrtimonm.github.io/Airdrop-Tracker/
+
 ## Fields Tracked
 
 - Project Name
