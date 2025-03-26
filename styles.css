@@ -1,0 +1,324 @@
+:root {
+    /* Dark Theme (Default) */
+    --primary-color: #6c5ce7;
+    --background-color: #1a1a1a;
+    --card-background: #2d2d2d;
+    --text-color: #ffffff;
+    --secondary-text: #a8a8a8;
+    --success-color: #00b894;
+    --danger-color: #d63031;
+    --input-border: #3d3d3d;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+    --primary-color: #4834d4;
+    --background-color: #f5f6fa;
+    --card-background: #ffffff;
+    --text-color: #2d3436;
+    --secondary-text: #636e72;
+    --success-color: #00b894;
+    --danger-color: #d63031;
+    --input-border: #dcdde1;
+}
+
+/* Blue Theme */
+[data-theme="blue"] {
+    --primary-color: #0984e3;
+    --background-color: #192a56;
+    --card-background: #273c75;
+    --text-color: #dcdde1;
+    --secondary-text: #74b9ff;
+    --success-color: #00b894;
+    --danger-color: #d63031;
+    --input-border: #40739e;
+}
+
+/* Purple Theme */
+[data-theme="purple"] {
+    --primary-color: #a55eea;
+    --background-color: #2f3640;
+    --card-background: #353b48;
+    --text-color: #f5f6fa;
+    --secondary-text: #c8d6e5;
+    --success-color: #00b894;
+    --danger-color: #d63031;
+    --input-border: #8c7ae6;
+}
+
+/* Green Theme */
+[data-theme="green"] {
+    --primary-color: #27ae60;
+    --background-color: #192a23;
+    --card-background: #2c4a40;
+    --text-color: #e8f3ed;
+    --secondary-text: #a8e6cf;
+    --success-color: #00b894;
+    --danger-color: #e74c3c;
+    --input-border: #2ecc71;
+}
+
+/* Orange Theme */
+[data-theme="orange"] {
+    --primary-color: #e67e22;
+    --background-color: #2d1810;
+    --card-background: #3d2317;
+    --text-color: #fff5eb;
+    --secondary-text: #ffd5a1;
+    --success-color: #27ae60;
+    --danger-color: #c0392b;
+    --input-border: #f39c12;
+}
+
+/* Red Theme */
+[data-theme="red"] {
+    --primary-color: #e74c3c;
+    --background-color: #2d1517;
+    --card-background: #3d1f21;
+    --text-color: #fff5f5;
+    --secondary-text: #ffb8b8;
+    --success-color: #2ecc71;
+    --danger-color: #c0392b;
+    --input-border: #c0392b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+.filters {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+input, select {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--card-background);
+    color: var(--text-color);
+}
+
+.theme-select {
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border: 1px solid var(--input-border);
+    cursor: pointer;
+}
+
+.airdrop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.airdrop-card {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.2s;
+}
+
+.airdrop-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.priority {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+.priority-high { background-color: var(--danger-color); }
+.priority-medium { background-color: var(--primary-color); }
+.priority-low { background-color: var(--success-color); }
+
+.card-body {
+    color: var(--secondary-text);
+}
+
+.card-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: var(--card-background);
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 6px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--input-border);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.form-group textarea {
+    height: 60px;
+    resize: vertical;
+    min-height: 40px;
+    max-height: 120px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.1);
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+    }
+    
+    header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .airdrop-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal {
+        padding: 10px;
+    }
+
+    .modal-content {
+        margin: 10px auto;
+        padding: 15px;
+        width: 95%;
+        max-height: 85vh;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px; /* Prevents zoom on mobile */
+    }
+
+    .card-actions {
+        flex-direction: column;
+    }
+
+    .card-actions button {
+        width: 100%;
+    }
+}
+
+@media (min-height: 800px) {
+    .modal-content {
+        margin: 40px auto;
+    }
+}

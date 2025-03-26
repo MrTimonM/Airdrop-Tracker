@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airdrop Hunter Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-parachute-box"></i> Airdrop Hunter Dashboard</h1>
+            <div class="header-controls">
+                <select id="themeSelector" class="theme-select">
+                    <option value="dark">Dark Theme</option>
+                    <option value="light">Light Theme</option>
+                    <option value="blue">Blue Theme</option>
+                    <option value="purple">Purple Theme</option>
+                    <option value="green">Green Theme</option>
+                    <option value="orange">Orange Theme</option>
+                    <option value="red">Red Theme</option>
+                </select>
+                <button id="addAirdropBtn" class="btn-primary">
+                    <i class="fas fa-plus"></i> Add New Airdrop
+                </button>
+                <button id="exportBtn" class="btn-primary">
+                    <i class="fas fa-download"></i> Export
+                </button>
+                <input type="file" id="importInput" accept=".json" style="display: none;">
+                <button id="importBtn" class="btn-primary">
+                    <i class="fas fa-upload"></i> Import
+                </button>
+            </div>
+        </header>
+
+        <div class="filters">
+            <input type="text" id="searchInput" placeholder="Search airdrops...">
+            <select id="priorityFilter">
+                <option value="">All Priorities</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+        </div>
+
+        <div class="airdrop-grid" id="airdropGrid"></div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div id="airdropModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New Airdrop</h2>
+            <form id="airdropForm">
+                <div class="form-group">
+                    <label>Project Name</label>
+                    <input type="text" id="projectName" required>
+                </div>
+                <div class="form-group">
+                    <label>Funding Amount ($)</label>
+                    <input type="number" id="fundingAmount">
+                </div>
+                <div class="form-group">
+                    <label>Priority</label>
+                    <select id="priority" required>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Invested Amount ($)</label>
+                    <input type="number" id="investedAmount">
+                </div>
+                <div class="form-group">
+                    <label>Guide Link</label>
+                    <input type="url" id="guideLink">
+                </div>
+                <div class="form-group">
+                    <label>Airdrop Type</label>
+                    <select id="airdropType" required>
+                        <option value="L1">Layer 1</option>
+                        <option value="L2">Layer 2</option>
+                        <option value="DeFi">DeFi</option>
+                        <option value="DAO">DAO</option>
+                        <option value="NFT">NFT</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Check-in Frequency</label>
+                    <select id="checkInFrequency" required>
+                        <option value="once">Once</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea id="notes"></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Save Airdrop</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
